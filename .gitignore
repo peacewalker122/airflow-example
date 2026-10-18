@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pre-commit-cache/
+logs/
+airflow.db
+webserver_config.py
+.DS_Store
+*.egg-info/

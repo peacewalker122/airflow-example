@@ -1,0 +1,25 @@
+airflowVersion: "3.1.0"
+executor: LocalExecutor
+
+images:
+  airflow:
+    repository: data-platform/airflow
+    tag: "0.1.0"
+    pullPolicy: IfNotPresent
+
+dags:
+  persistence:
+    enabled: false
+  gitSync:
+    enabled: false
+
+logs:
+  persistence:
+    enabled: true
+    size: 10Gi
+
+postgresql:
+  enabled: true
+
+redis:
+  enabled: false
