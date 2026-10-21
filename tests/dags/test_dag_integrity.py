@@ -5,6 +5,7 @@ from airflow.models.dagbag import DagBag
 
 DAG_IDS = {
     "ingestion.sftp_to_clickhouse",
+    "ingestion.kafka_to_clickhouse",
     "ingestion.api_to_parquet",
     "analytics.daily_summary",
     "maintenance.retention_cleanup",
@@ -39,6 +40,7 @@ def test_every_dag_declares_owner_utc_schedule_and_retries() -> None:
 def test_task_ids_name_actions() -> None:
     expected = {
         "ingestion.sftp_to_clickhouse": {"load_csv_to_clickhouse"},
+        "ingestion.kafka_to_clickhouse": {"load_kafka_to_clickhouse"},
         "ingestion.api_to_parquet": {"extract", "transform", "cleanup"},
         "analytics.daily_summary": {"execute_summary_query"},
         "maintenance.retention_cleanup": {"delete_expired_objects"},

@@ -24,6 +24,9 @@ Create these Connections in Airflow or provide them through a secret backend:
 - `api_default`: HTTP connection with API base URL and any required headers in connection extras.
 - `clickhouse_default`: HTTP connection with ClickHouse hostname, port, and database in `schema` or `database` extra. Set `secure` to `true` in extras to use HTTPS; use HTTPS for remote hosts.
 - `aws_default`: AWS connection for the S3 bucket. Prefer workload identity or a secret backend over static credentials.
+- `kafka_default`: Airflow Connection with type `Apache Kafka` in the Airflow UI (provider connection type `kafka`), used by the Kafka consumer hook. Set `bootstrap.servers` and stable `group.id` in extras, plus `enable.auto.commit=false` and `auto.offset.reset=earliest`. Add required authentication and TLS details to extras.
+
+Configure `DATA_PLATFORM_KAFKA_TOPIC` with the topic name; `DATA_PLATFORM_KAFKA_CONN_ID` defaults to `kafka_default`, and `DATA_PLATFORM_KAFKA_MAX_MESSAGES` defaults to `1000` and must be positive. Kafka shares `DATA_PLATFORM_CLICKHOUSE_CONN_ID` and `DATA_PLATFORM_CLICKHOUSE_TABLE` with SFTP ingestion. Compose does not start a Kafka broker; provide an external broker and Airflow Connection.
 
 Connection IDs can be changed using the matching `DATA_PLATFORM_*_CONN_ID` setting. The API connection endpoint setting is a path relative to the HTTP connection host. API responses must be a JSON array or an object whose `data` member is an array.
 
